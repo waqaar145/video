@@ -1,27 +1,48 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
-  BrowserRouter as Router,
   Link
 } from "react-router-dom";
 
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  NavbarText
+} from 'reactstrap';
+import { NavLink as RRNavLink } from 'react-router-dom';
+
 const PrimaryHeader = () => {
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => setIsOpen(!isOpen);
+
   return (
-    <Router>
-      <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact</Link>
-          </li>
-        </ul>
-        <hr />
-      </div>
-    </Router>
+    <Navbar color="light" light expand="md">
+      <NavbarBrand href="/">Reactstrap</NavbarBrand>
+      <NavbarToggler onClick={toggle} />
+      <Collapse isOpen={isOpen} navbar>
+        <Nav className="mr-auto" navbar>
+          <NavItem>
+            <NavLink tag={RRNavLink} exact to="/">Home</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink tag={RRNavLink} exact to="/about">About</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink tag={RRNavLink} exact to="/contact">Contact</NavLink>
+          </NavItem>
+        </Nav>
+      </Collapse>
+    </Navbar>
   )
 }
 
